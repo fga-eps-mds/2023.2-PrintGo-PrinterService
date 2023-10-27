@@ -1,12 +1,11 @@
 #  Node.js Image
-FROM node:14
+FROM node:16
 
 # Diretory
 WORKDIR /app
 
 # Copy files
-COPY package*.json ./
-COPY App.js ./
+COPY . .
 
 # Install npm
 RUN npm install
