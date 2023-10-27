@@ -1,5 +1,4 @@
 # 2023.2-PrintGo-PrinterService
-# 2023.2-PrintGo-FrontEnd
 
 <div align="center">
      <img src="assets/logoPrintGo.svg" height="350px" width="350px"> 
