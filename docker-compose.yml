@@ -11,6 +11,8 @@ services:
       - DATABASE_URL=postgresql://admin:printgo@postgres:5432/printerservice
     depends_on:
       - postgres
+    volumes:
+      - .:/app
 
   postgres:
     image: postgres
