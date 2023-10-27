@@ -12,7 +12,7 @@ services:
 
   postgres:
     image: postgres
-    container_name: printgoprinterservice
+    container_name: printgoprinterservicedb
     ports:
       - "5432:5432"
     environment:
