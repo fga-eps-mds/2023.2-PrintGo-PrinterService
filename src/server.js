@@ -43,3 +43,9 @@ app.post("/register-printer", (req, res) => {
 app.get("printers", (req, res) => {
   res.send(database.printers);
 });
+
+//Start server
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log("Servidor rodando na porta ${PORT}");
+});
