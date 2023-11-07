@@ -38,3 +38,8 @@ app.post("/register-printer", (req, res) => {
   //response
   res.status(201).send(newPrinter);
 });
+
+//Routs to lister printers
+app.get("printers", (req, res) => {
+  res.send(database.printers);
+});
