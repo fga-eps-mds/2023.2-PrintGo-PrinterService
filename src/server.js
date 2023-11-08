@@ -1,51 +1,17 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const express = require('express');
+const bodyParser = require('body-parser');
+const printerRoutes = require('./routes/printerRoutes');
+const errorMiddleware = require('./middlewares/errorMiddleware');
 
 const app = express();
 
-//CORS habilitation
-app.use(cors());
-
-//JSON and URL encoded bodies
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-//database
-let database = {
-  printers: [],
-};
+app.use('/api/printers', printerRoutes);
 
-//regiter printer route
-app.post("/register-printer", (req, res) => {
-  const { name, model, ip } = req.body;
-  if (!name || !model || !ip) {
-    return res
-      .status(400)
-      .send({ message: "Nome, modelo e IP são obrigatórios" });
-  }
-  //New object
-  const newPrinter = {
-    id: database.printers.length + 1,
-    name,
-    model,
-    ip,
-  };
+app.use(errorMiddleware);
 
-  // Add database
-  database.printers.push(newPrinter);
-
-  //response
-  res.status(201).send(newPrinter);
-});
-
-//Routs to lister printers
-app.get("printers", (req, res) => {
-  res.send(database.printers);
-});
-
-//Start server
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log("Servidor rodando na porta ${PORT}");
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
