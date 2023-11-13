@@ -14,4 +14,4 @@ RUN npm install
 EXPOSE 8080
 
 # Start the project
-CMD ["node", "app.js"]
+CMD ["npx", "nodemon", "app.js"]
