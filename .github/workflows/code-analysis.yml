@@ -18,13 +18,13 @@ jobs:
           fetch-depth: 0
 
       - name: Instala dependências
-        run: npm
+        run: yarn
 
       - name: Executa linter
-        run: npm lint
+        run: yarn lint
 
       - name: Executa testes e gera cobertura
-        run: npm test:all
+        run: yarn test:all
 
       - name: Executa SonarCloud Scan
         if: ${{ always() }}
