@@ -55,4 +55,16 @@ export default {
             return response.json({ error: true, message: error.message });
         }
     },
+
+    async  listImpressoras(request: Request, response: Response) {
+        try {
+            const impressoras = await prisma.impressora.findMany();
+            return response.json(impressoras);
+        } catch (error) {
+            return response.status(500).json({
+                error: true,
+                message: 'Erro: Ocorreu um erro ao buscar as Impressoras Cadastradas.'
+            });
+        }
+    },
 };
