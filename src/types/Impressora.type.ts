@@ -6,6 +6,7 @@ export type ImpressoraCreateInput = {
     contadorInstalacao: number;
     dataInstalacao: Date;
     dataUltimoContador: Date;
+    unidadeId?: string;
 }
 export type ImpressoraCreateOutput = {
     id: string;
@@ -16,4 +17,5 @@ export type ImpressoraCreateOutput = {
     contadorInstalacao: number;
     dataInstalacao: Date;
     dataUltimoContador: Date;
+    unidadeId?: string;
 }

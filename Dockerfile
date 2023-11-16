@@ -2,7 +2,7 @@ FROM node:18
 
 WORKDIR /src
 
-ENV PORT=8080
+ENV PORT=8001
 
 COPY ./package.json .
 RUN yarn install

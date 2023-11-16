@@ -13,6 +13,7 @@ export default {
                 contadorInstalacao, 
                 dataInstalacao,
                 dataUltimoContador, 
+                
             } = request.body as ImpressoraCreateInput;
 
             const impressoraExist = await prisma.impressora.findUnique({ where: { ip } });
@@ -33,6 +34,7 @@ export default {
                     contadorInstalacao, 
                     dataInstalacao,
                     dataUltimoContador, 
+                    
                 }
             });
 
