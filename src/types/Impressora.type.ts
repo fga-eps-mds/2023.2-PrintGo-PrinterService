@@ -1,22 +1,19 @@
 export type ImpressoraCreateInput = {
-    nome: string;
-    rua: string;
-    logradouro: string;
-    complemento: string;
-    bairro: string;
-    cidade: string;
-    cep: string;
-    numero: number;
+    padrao_id: string;
+    ip: string;
+    numeroSerie: string;
+    codigoLocadora: string;
+    contadorInstalacao: number;
+    dataInstalacao: Date;
+    dataUltimoContador: Date;
 }
-
 export type ImpressoraCreateOutput = {
     id: string;
-    nome: string;
-    rua: string;
-    logradouro: string;
-    complemento: string;
-    bairro: string;
-    cidade: string;
-    cep: string;
-    numero: number;
+    padrao_id: string;
+    ip: string;
+    numeroSerie: string;
+    codigoLocadora: string;
+    contadorInstalacao: number;
+    dataInstalacao: Date;
+    dataUltimoContador: Date;
 }

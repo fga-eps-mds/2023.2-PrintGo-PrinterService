@@ -6,43 +6,33 @@ export default {
     async createImpressora(request: Request, response: Response) {
         try {
             const {
-              padrao,
-              ip,
-              numeroSerie,
-              codigoLocadora,
-              contadorInstalacao,
-              dataInstalacao,
-              contadorRetirada,
-              dataRetirada,
-              ultimoContador,
-              dataUltimoContador,
-              unidadePai,
-              unidadeFilho,
+                padrao_id,
+                ip,
+                numeroSerie,
+                codigoLocadora,
+                contadorInstalacao, 
+                dataInstalacao,
+                dataUltimoContador, 
             } = request.body as ImpressoraCreateInput;
 
-            const impressoraExist = await prisma.unidade.findUnique({ where: { ip } });
+            const impressoraExist = await prisma.impressora.findUnique({ where: { ip } });
 
             if (impressoraExist) {
                 return response.status(400).json({
                     error: true,
-                    message: 'Erro: Unidade já existe!'
+                    message: 'Erro: Impressora já existe!'
                 });
             }
 
-            const impressora = await prisma.unidade.create({
+            const impressora = await prisma.impressora.create({
                 data: {
-                    padrao,
+                    padrao_id,
                     ip,
                     numeroSerie,
                     codigoLocadora,
-                    contadorInstalacao,
+                    contadorInstalacao, 
                     dataInstalacao,
-                    contadorRetirada,
-                    dataRetirada,
-                    ultimoContador,
-                    dataUltimoContador,
-                    unidadePai,
-                    unidadeFilho,
+                    dataUltimoContador, 
                 }
             });
 
