@@ -1,7 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const { createPrinter } = require('../controllers/printerController');
+import { Router } from 'express';
+import ImpressoraController from '../controllers/Impressora.controller';
+import { requestHandler } from '../middlewares/requestWrapper.adapter';
 
-router.post('/register', createPrinter);
+const impressoraRoutes = Router();
+impressoraRoutes.post('/create', requestHandler(ImpressoraController.createImpressora));
 
-module.exports = router;
+export default impressoraRoutes;
