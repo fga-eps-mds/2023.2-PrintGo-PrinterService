@@ -3,10 +3,15 @@ import cors from 'cors';
 import impressoraRoutes from './routes/printer.route'
 import padraoRoutes from './routes/padrao.route';
 
+const corsOptions = {
+    origin: '*'
+}
+
 const app = Express();
 app.use(Express.json());
-app.use(cors());
 const PORT = process.env.PORT || 8001;
+
+app.use(cors(corsOptions));
 
 app.use('/impressora', impressoraRoutes);
 app.use('/padrao', padraoRoutes)
