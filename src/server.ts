@@ -4,8 +4,11 @@ import impressoraRoutes from './routes/printer.route'
 import padraoRoutes from './routes/padrao.route';
 
 const corsOptions = {
-    origin: '*'
-}
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+};
+  
 
 const app = Express();
 app.use(Express.json());
