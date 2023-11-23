@@ -1,12 +1,29 @@
-import express from 'express';
+import Express from 'express';
+import cors from 'cors';
+import impressoraRoutes from './routes/printer.route'
+import padraoRoutes from './routes/padrao.route';
 
-const app = express();
-const port = 8080;
+const corsOptions = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+};
+  
 
-app.get('/', (req, res) => {
-  res.send('Olá, mundo!');
+const app = Express();
+app.use(Express.json());
+const PORT = process.env.PORT || 8001;
+
+app.use(cors(corsOptions));
+
+app.use('/impressora', impressoraRoutes);
+app.use('/padrao', padraoRoutes)
+const server = app.listen(PORT, () => {
+    console.log(`Server is running ${PORT}`);
 });
 
-app.listen(port, () => {
-  console.log(`server rodando em http://localhost:${port}`);
-});
+export { server };
+
+export default app;
+
+

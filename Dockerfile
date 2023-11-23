@@ -1,17 +1,14 @@
-#  Node.js Image
-FROM node:16
+FROM node:18
 
-# Diretory
-WORKDIR /app
+WORKDIR /src
 
-# Copy files
+ENV PORT=8001
+
+COPY ./package.json .
+RUN yarn install
+
 COPY . .
 
-# Install npm
-RUN npm install
+EXPOSE $PORT
 
-# Expose port
-EXPOSE 8080
-
-# Start the project
-CMD ["npx", "nodemon", "app.js"]
+CMD [ "yarn", "start" ]
