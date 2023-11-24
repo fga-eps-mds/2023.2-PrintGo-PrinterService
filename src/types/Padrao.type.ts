@@ -5,12 +5,12 @@ export type PadraoCreateInput = {
     numeroSerie: string;
     versaoFirmware: string;
     tempoAtivoSistema: Date;
-    totalDigitalizacoes: number;
-    totalCopiasPB: number;
-    totalCopiasColoridas: number;
-    totalImpressoesPb: number;
-    totalImpressoesColoridas: number;
-    totalGeral: number;
+    totalDigitalizacoes: string;
+    totalCopiasPB: string;
+    totalCopiasColoridas: string;
+    totalImpressoesPb: string;
+    totalImpressoesColoridas: string;
+    totalGeral: string;
     enderecoIp: string;
 };
 
@@ -21,12 +21,12 @@ export type PadraoCreateOutput = {
     modelo: string;
     numeroSerie: string;
     versaoFirmware: string;
-    tempoAtivoSistema: Date;
-    totalDigitalizacoes: number;
-    totalCopiasPB: number;
-    totalCopiasColoridas: number;
-    totalImpressoesPb: number;
-    totalImpressoesColoridas: number;
-    totalGeral: number;
+    tempoAtivoSistema: string;
+    totalDigitalizacoes: string;
+    totalCopiasPB: string;
+    totalCopiasColoridas: string;
+    totalImpressoesPb: string;
+    totalImpressoesColoridas: string;
+    totalGeral: string;
     enderecoIp: string;
 };
