@@ -1,4 +1,4 @@
-import { Request, Response, request } from 'express';
+import { Request, Response } from 'express';
 import { prisma } from '../database';
 import {PadraoCreateInput} from '../types/Padrao.type'
 
@@ -86,29 +86,5 @@ export default {
         }
     },
 
-    async deletePadraoById(request: Request, response: Response) {
-        const { id } = request.params;
-
-        try {
-            const printer = await prisma.padrao.delete({
-                where: {
-                    id: String(id),
-                },
-            });
-
-            console.log(printer);
-
-            return printer ? 
-            response.status(200).json({ message: "Sucesso: padrão deletado com sucesso." }) : 
-            response.status(404).json({
-                error: true,
-                message: 'Erro: Não foi possível apagar o padrão.'
-            });
-        } catch (error) {
-            response.status(500).json({
-                error: true,
-                message: 'Erro: Ocorreu um erro ao apagar o padrão.'
-            });
-        }
-    },
+    
 };
