@@ -5,12 +5,12 @@ export type PadraoCreateInput = {
     numeroSerie: string;
     versaoFirmware: string;
     tempoAtivoSistema: Date;
-    totalDigitalizacoes: number;
-    totalCopiasPB: number;
-    totalCopiasColoridas: number;
-    totalImpressoesPb: number;
-    totalImpressoesColoridas: number;
-    totalGeral: number;
+    totalDigitalizacoes: string;
+    totalCopiasPB: string;
+    totalCopiasColoridas: string;
+    totalImpressoesPb: string;
+    totalImpressoesColoridas: string;
+    totalGeral: string;
     enderecoIp: string;
 };
 
@@ -22,11 +22,70 @@ export type PadraoCreateOutput = {
     numeroSerie: string;
     versaoFirmware: string;
     tempoAtivoSistema: Date;
-    totalDigitalizacoes: number;
-    totalCopiasPB: number;
-    totalCopiasColoridas: number;
-    totalImpressoesPb: number;
-    totalImpressoesColoridas: number;
-    totalGeral: number;
+    totalDigitalizacoes: string;
+    totalCopiasPB: string;
+    totalCopiasColoridas: string;
+    totalImpressoesPb: string;
+    totalImpressoesColoridas: string;
+    totalGeral: string;
     enderecoIp: string;
+};
+
+export type PadraoUpdateInput = {
+  id: string;
+  tipo: string;
+  marca: string;
+  modelo: string;
+  numeroSerie: string;
+  versaoFirmware: string;
+  tempoAtivoSistema: Date;
+  totalDigitalizacoes: string;
+  totalCopiasPB: string;
+  totalCopiasColoridas: string;
+  totalImpressoesPb: string;
+  totalImpressoesColoridas: string;
+  totalGeral: string;
+  enderecoIp: string;
+  status?: string;
+};
+
+export type PadraoUpdateOutput = {
+  id: string;
+  tipo: string;
+  marca: string;
+  modelo: string;
+  numeroSerie: string;
+  versaoFirmware: string;
+  tempoAtivoSistema: Date;
+  totalDigitalizacoes: string;
+  totalCopiasPB: string;
+  totalCopiasColoridas: string;
+  totalImpressoesPb: string;
+  totalImpressoesColoridas: string;
+  totalGeral: string;
+  enderecoIp: string;
+  status?: string;
+};
+
+export type PadraoToggleInput = {
+  id: string;
+  status: string
+};
+
+export type PadraoToggleOutput = {
+  id: string;
+  tipo: string;
+  marca: string;
+  modelo: string;
+  numeroSerie: string;
+  versaoFirmware: string;
+  tempoAtivoSistema: Date;
+  totalDigitalizacoes: string;
+  totalCopiasPB: string;
+  totalCopiasColoridas: string;
+  totalImpressoesPb: string;
+  totalImpressoesColoridas: string;
+  totalGeral: string;
+  enderecoIp: string;
+  status: string;
 };
