@@ -86,5 +86,33 @@ export default {
         }
     },
 
-    
+    async togglePadrao(request: Request, response: Response) {
+      try {
+          const { id, status } = request.body;
+  
+          const toggleStatus = status === 'ATIVO' ? 'DESATIVADO' : 'ATIVO';
+  
+          const patternExists = await prisma.padrao.findUnique({ where: { id } });
+  
+          if (!patternExists) {
+              return response.status(404).json({
+                  error: true,
+                  message: 'Erro: Padrão não encontrada!',
+              });
+          }
+  
+          const toggle = await prisma.padrao.update({
+              where: { id },
+              data: { status: toggleStatus },
+          });
+  
+          return response.status(200).json({
+              message: 'Sucesso: Padrão atualizada com sucesso!',
+              data: toggle,
+          });
+  
+      } catch (error) {
+          return response.status(500).json({ error: true, message: error.message });
+      }
+  },
 };
