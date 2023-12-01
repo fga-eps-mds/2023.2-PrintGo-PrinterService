@@ -50,7 +50,7 @@ export default {
 
     async  listImpressoras(request: Request, response: Response) {
         try {
-            const impressoras = await prisma.impressora.findMany();
+            const impressoras = await prisma.impressora.findMany({ include: { padrao: true }});
             return response.json(impressoras);
         } catch (error) {
             return response.status(500).json({
