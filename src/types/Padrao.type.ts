@@ -21,7 +21,7 @@ export type PadraoCreateOutput = {
     modelo: string;
     numeroSerie: string;
     versaoFirmware: string;
-    tempoAtivoSistema: Date;
+    tempoAtivoSistema: string;
     totalDigitalizacoes: string;
     totalCopiasPB: string;
     totalCopiasColoridas: string;
