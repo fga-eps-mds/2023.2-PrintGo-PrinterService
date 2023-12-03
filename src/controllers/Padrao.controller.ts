@@ -101,14 +101,14 @@ export default {
               });
           }
   
-          const toggle = await prisma.padrao.update({
+          const togglePattern = await prisma.padrao.update({
               where: { id },
               data: { status: toggleStatus },
           });
   
           return response.status(200).json({
               message: 'Sucesso: Padrão atualizada com sucesso!',
-              data: toggle,
+              data: togglePattern,
           });
   
       } catch (error) {
