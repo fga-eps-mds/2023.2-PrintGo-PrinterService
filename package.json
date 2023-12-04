@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest --passWithNoTests --no-cache --runInBand",
         "test:all": "CI=true npm run test -- --coverage",
+        "build": "tsc",
         "start": "nodemon",
         "lint": "eslint  --ext .ts",
         "lint:fix": "eslint  --ext .ts --fix"
