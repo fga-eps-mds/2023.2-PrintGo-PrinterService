@@ -27,4 +27,19 @@ describe('POST /padrao/create', () => {
     expect(response.body.message).toBe('Sucesso: padrao cadastrada com sucesso!');
     expect(response.body.data).toHaveProperty('id');
   });
+
+  it('should return a 400 status if padrao creation fails', async () => {
+    // Simule uma falha na criação do padrao, por exemplo, fornecendo dados inválidos
+    const invalidPadraoData = {
+      // ...dados inválidos
+    };
+
+    const response = await request(server)
+      .post('/padrao/create')
+      .send(invalidPadraoData);
+
+    expect(response.status).toBe(200);
+    expect(response.body.error).toBe(true);
+    expect(response.body.message).toBeDefined();
+  });
 });
