@@ -25,6 +25,8 @@ jobs:
 
       - name: Executa testes e gera cobertura
         run: yarn test:all
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL_DEV}}
 
       - name: Executa SonarCloud Scan
         if: ${{ always() }}
