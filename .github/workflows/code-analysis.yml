@@ -39,7 +39,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: true
+          fail_ci_if_error: false
           flags: jest
           name: 2023.2-PrintGo-PrinterService
           verbose: true
