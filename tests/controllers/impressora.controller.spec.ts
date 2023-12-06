@@ -4,9 +4,10 @@ import { prisma } from '../../src/database';
 
 describe('Printer Controller', () => {
     let impressora_created_id: string;
-    const defaultIP = '192.168.1.3'
-    const defaultPadrao = 'clpt40vux00009e8fbb4l6ril';
+    const defaultIP = `teste${Date.now()}.1.2`;
+    const defaultPadrao = 'clpt7ctsc0004jndhnugh3yri';
     const defaultLocadora = 'cfa19c26-3b18-4659-b02e-51047e5b3d13';
+    const defaultSerie = `teste${Date.now()}.serienumber`;
 
     afterAll(async () => {
         await server.close();
@@ -23,7 +24,7 @@ describe('Printer Controller', () => {
         const printData = {
             padrao_id: defaultPadrao,
             ip: defaultIP,
-            numeroSerie: '125123',
+            numeroSerie: defaultSerie,
             codigoLocadora: defaultLocadora,
             contadorInstalacao: 1000,
             dataInstalacao: '2023-12-01T12:00:00Z',
@@ -46,7 +47,7 @@ describe('Printer Controller', () => {
             .send({
                 padrao_id: defaultPadrao,
                 ip: defaultIP,
-                numeroSerie: '125123',
+                numeroSerie: defaultSerie,
                 codigoLocadora: defaultLocadora,
                 contadorInstalacao: 1000,
                 dataInstalacao: '2023-12-01T12:00:00Z',
@@ -72,7 +73,6 @@ describe('Printer Controller', () => {
         expect(response.body.error).toBe(true);
         expect(response.body.message).toBe('Erro: Impressora já existe!');
     });
-
 
     it('should list all printers and return a 200 status', async () => {
         const response = await request(server)
@@ -102,8 +102,8 @@ describe('Printer Controller', () => {
         const editedData = {
             id: impressora_created_id,
             padrao_id: defaultPadrao,
-            ip: '192.168.1.4',
-            numeroSerie: '1251234',
+            ip: defaultIP,
+            numeroSerie: defaultSerie,
             codigoLocadora: defaultLocadora,
             contadorInstalacao: 1500,
             dataInstalacao: '2023-12-02T12:00:00Z',
@@ -128,11 +128,9 @@ describe('Printer Controller', () => {
             });
 
         expect(response.status).toBe(404);
-        
-        
     });
 
-    it('should return 404 when trying to update  for a non-existing impressora', async () => {
+    it('should return 404 when trying to update for a non-existing impressora', async () => {
         const nonExistingPrinterId = 'non-existing-id';
 
         const toggleResponse = await request(server)
@@ -146,7 +144,7 @@ describe('Printer Controller', () => {
         expect(toggleResponse.body).toHaveProperty('error', true);
         expect(toggleResponse.body).toHaveProperty('message', 'Erro: Impressora não encontrada!');
     });
-    
+
     it('should toggle the status of an existing printer and return a 200 status', async () => {
         const toggleData = {
             id: impressora_created_id,

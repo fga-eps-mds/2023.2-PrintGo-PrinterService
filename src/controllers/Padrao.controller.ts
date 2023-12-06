@@ -19,6 +19,7 @@ export default {
                 totalImpressoesColoridas,
                 totalGeral,
                 enderecoIp,
+                modeloImpressora,
             } = request.body as PadraoCreateInput;
 
 
@@ -37,6 +38,7 @@ export default {
                     totalImpressoesColoridas,
                     totalGeral,
                     enderecoIp,
+                    modeloImpressora,
                 }
             });
 

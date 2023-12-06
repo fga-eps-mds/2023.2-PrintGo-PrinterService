@@ -12,7 +12,9 @@ export default {
                 codigoLocadora,
                 contadorInstalacao, 
                 dataInstalacao,
-                dataUltimoContador, 
+                dataUltimoContador,
+                datacontadorRetirada,
+                ultimoContador,
                 
             } = request.body as ImpressoraCreateInput;
 
@@ -33,8 +35,9 @@ export default {
                     codigoLocadora,
                     contadorInstalacao, 
                     dataInstalacao,
-                    dataUltimoContador, 
-                    
+                    dataUltimoContador,
+                    datacontadorRetirada,
+                    ultimoContador,
                 }
             });
 
@@ -71,7 +74,10 @@ export default {
                 contadorInstalacao, 
                 dataInstalacao,
                 dataUltimoContador,
-                unidadeId, 
+                unidadeId,
+                datacontadorRetirada,
+                dataRetirada,
+                ultimoContador,
             } = request.body;
 
             const impressoraExist = await prisma.impressora.findUnique({ where: { id } });
@@ -94,7 +100,10 @@ export default {
                     contadorInstalacao: contadorInstalacao, 
                     dataInstalacao: dataInstalacao,
                     dataUltimoContador: dataUltimoContador,
-                    unidadeId: unidadeId 
+                    unidadeId: unidadeId, 
+                    datacontadorRetirada: datacontadorRetirada,
+                    dataRetirada: dataRetirada,
+                    ultimoContador: ultimoContador,
                 }   
             });
 

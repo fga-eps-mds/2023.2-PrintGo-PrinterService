@@ -3,6 +3,7 @@ export type PadraoCreateInput = {
     marca: string;
     modelo: string;
     numeroSerie: string;
+    modeloImpressora?: string;
     versaoFirmware: string;
     tempoAtivoSistema:  string;  
     totalDigitalizacoes: string;
@@ -20,6 +21,7 @@ export type PadraoCreateOutput = {
     marca: string;
     modelo: string;
     numeroSerie: string;
+    modeloImpressora?: string;
     versaoFirmware: string;
     tempoAtivoSistema: string;
     totalDigitalizacoes: string;

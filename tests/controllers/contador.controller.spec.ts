@@ -44,7 +44,7 @@ describe('Contador Controller', () => {
             .send({
                 contadorCopiasPB: "500",
                 contadorImpressoesPB: "1000",
-                numeroSerie: defaultSerie,
+                numeroSerie: '123',
                 contadorImpressoesColoridas: "150",
                 contadorCopiasColoridas: "100",
                 contadorGeral: "1200",
@@ -55,7 +55,7 @@ describe('Contador Controller', () => {
         const contadorData = {
             contadorCopiasPB: "500",
             contadorImpressoesPB: "1000",
-            numeroSerie: defaultSerie,
+            numeroSerie: '123',
             contadorImpressoesColoridas: "150",
             contadorCopiasColoridas: "100",
             contadorGeral: "1200",
