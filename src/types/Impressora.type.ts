@@ -7,6 +7,8 @@ export type ImpressoraCreateInput = {
     dataInstalacao: Date;
     dataUltimoContador: Date;
     unidadeId?: string;
+    datacontadorRetirada?: Date;
+    ultimoContador?: string;
 }
 export type ImpressoraCreateOutput = {
     id: string;
@@ -18,6 +20,8 @@ export type ImpressoraCreateOutput = {
     dataInstalacao: Date;
     dataUltimoContador: Date;
     unidadeId?: string;
+    datacontadorRetirada?: Date;
+    ultimoContador?: string;
 }
 
 export type ImpressoraUpdateInput = {
@@ -31,6 +35,8 @@ export type ImpressoraUpdateInput = {
     dataUltimoContador: Date;
     unidadeId?: string;
     status?: string;
+    datacontadorRetirada?: Date;
+    ultimoContador?: string;
 }
 
 export type ImpressoraUpdateOutput = {
@@ -44,6 +50,8 @@ export type ImpressoraUpdateOutput = {
     dataUltimoContador: Date;
     unidadeId?: string;
     status?: string;
+    datacontadorRetirada?: Date;
+    ultimoContador?: string;
 }
 
 export type ImpressoraToggleInput = {
@@ -61,5 +69,7 @@ export type ImpressoraToggleOutput = {
     dataInstalacao: Date;
     dataUltimoContador: Date;
     unidadeId?: string;
+    datacontadorRetirada?: Date;
+    ultimoContador?: string;
     status: string;
 }

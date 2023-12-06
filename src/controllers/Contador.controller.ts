@@ -16,14 +16,7 @@ export default {
                 
             } = request.body as ContadorCreateInput;
 
-            const impressoraExist = await prisma.impressora.findUnique({ where: { numeroSerie } });
-
-            if (!impressoraExist) {
-                return response.status(400).json({
-                    error: true,
-                    message: 'Erro: Impressora já existe!'
-                });
-            }
+        
 
             const contador = await prisma.contador.create({
                 data: {
