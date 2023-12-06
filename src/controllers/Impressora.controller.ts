@@ -6,38 +6,51 @@ export default {
     async createImpressora(request: Request, response: Response) {
         try {
             const {
-                padrao_id,
                 ip,
+                padrao_id,
                 numeroSerie,
                 codigoLocadora,
-                contadorInstalacao, 
+                contadorInstalacao,    
                 dataInstalacao,
-                dataUltimoContador,
-                datacontadorRetirada,
+                contadorRetiradas,
+                dataContadorRetirada,
                 ultimoContador,
-                
+                dataUltimoContador,
+                unidadeId,
             } = request.body as ImpressoraCreateInput;
 
             const impressoraExist = await prisma.impressora.findUnique({ where: { ip } });
+            const impressoraExistNSeries = await prisma.impressora.findUnique({ where: { numeroSerie } });
 
-            if (impressoraExist) {
+            if (impressoraExist || impressoraExistNSeries) {
                 return response.status(400).json({
                     error: true,
                     message: 'Erro: Impressora já existe!'
                 });
             }
 
+            const padraoExist = await prisma.padrao.findUnique({ where: { id: padrao_id } });
+
+            if (!padraoExist) {
+                return response.status(404).json({
+                    error: true,
+                    message: 'Erro: Padrao não encontrado!'
+                });
+            }
+            
             const impressora = await prisma.impressora.create({
                 data: {
-                    padrao_id,
                     ip,
+                    padrao_id,
                     numeroSerie,
                     codigoLocadora,
-                    contadorInstalacao, 
+                    contadorInstalacao,    
                     dataInstalacao,
-                    dataUltimoContador,
-                    datacontadorRetirada,
+                    contadorRetiradas,
+                    dataContadorRetirada,
                     ultimoContador,
+                    dataUltimoContador,
+                    unidadeId,
                 }
             });
 
@@ -65,22 +78,10 @@ export default {
 
     async editImpressora(request: Request, response: Response) {
         try {
-            const {
-                id,
-                padrao_id,
-                ip,
-                numeroSerie,
-                codigoLocadora,
-                contadorInstalacao, 
-                dataInstalacao,
-                dataUltimoContador,
-                unidadeId,
-                datacontadorRetirada,
-                dataRetirada,
-                ultimoContador,
-            } = request.body;
+            const { id } = request.params;
+            const impressoraToChange = request.body;
 
-            const impressoraExist = await prisma.impressora.findUnique({ where: { id } });
+            const impressoraExist = await prisma.impressora.findUnique({ where: { id: String(id) } });
       
             if (!impressoraExist) {
               return response.status(404).json({
@@ -90,21 +91,10 @@ export default {
             }
 
             const updatedImpressora = await prisma.impressora.update({
-                where: {id: id},
-                data: {
-                    id: id,
-                    padrao_id: padrao_id,
-                    ip: ip,
-                    numeroSerie: numeroSerie,
-                    codigoLocadora: codigoLocadora,
-                    contadorInstalacao: contadorInstalacao, 
-                    dataInstalacao: dataInstalacao,
-                    dataUltimoContador: dataUltimoContador,
-                    unidadeId: unidadeId, 
-                    datacontadorRetirada: datacontadorRetirada,
-                    dataRetirada: dataRetirada,
-                    ultimoContador: ultimoContador,
-                }   
+                where: {
+                    id: String(id)
+                },
+                data: impressoraToChange
             });
 
             return response.status(200).json({

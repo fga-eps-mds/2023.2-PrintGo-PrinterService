@@ -6,6 +6,6 @@ const impressoraRoutes = Router();
 impressoraRoutes.post('/create', requestHandler(ImpressoraController.createImpressora));
 impressoraRoutes.get('/', requestHandler(ImpressoraController.listImpressoras));
 impressoraRoutes.put('/', requestHandler(ImpressoraController.editImpressora));
-impressoraRoutes.patch('/', requestHandler(ImpressoraController.toggleImpressora));
+impressoraRoutes.patch('/:id', requestHandler(ImpressoraController.toggleImpressora));
 
 export default impressoraRoutes;
