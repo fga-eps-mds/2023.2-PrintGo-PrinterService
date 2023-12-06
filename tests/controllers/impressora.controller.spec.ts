@@ -5,7 +5,7 @@ import { prisma } from '../../src/database';
 describe('Printer Controller', () => {
     let impressora_created_id: string;
     const defaultIP = `teste${Date.now()}.1.2`;
-    const defaultPadrao = 'clpt7ctsc0004jndhnugh3yri';
+    const defaultPadrao = 'clptb6ao60000qr485ep4l9el';
     const defaultLocadora = 'cfa19c26-3b18-4659-b02e-51047e5b3d13';
     const defaultSerie = `teste${Date.now()}.serienumber`;
 
@@ -27,8 +27,11 @@ describe('Printer Controller', () => {
             numeroSerie: defaultSerie,
             codigoLocadora: defaultLocadora,
             contadorInstalacao: 1000,
-            dataInstalacao: '2023-12-01T12:00:00Z',
-            dataUltimoContador: '2023-12-01T12:30:00Z',
+            dataInstalacao: "2023-01-15T00:00:00.000Z",
+            dataUltimoContador: "2023-12-01T12:30:00.000Z",
+            datacontadorRetirada: "2023-12-05T08:45:00.000Z",
+            ultimoContador: "valor_ultimoContador"
+        
         };
 
         const response = await request(server)
@@ -50,8 +53,10 @@ describe('Printer Controller', () => {
                 numeroSerie: defaultSerie,
                 codigoLocadora: defaultLocadora,
                 contadorInstalacao: 1000,
-                dataInstalacao: '2023-12-01T12:00:00Z',
-                dataUltimoContador: '2023-12-01T12:30:00Z',
+                dataInstalacao: "2023-01-15T00:00:00.000Z",
+                dataUltimoContador: "2023-12-01T12:30:00.000Z",
+                datacontadorRetirada: "2023-12-05T08:45:00.000Z",
+                ultimoContador: "valor_ultimoContador"
             });
 
         // Tente criar uma nova impressora com o mesmo ip
@@ -61,8 +66,10 @@ describe('Printer Controller', () => {
             numeroSerie: '1251234',
             codigoLocadora: defaultLocadora,
             contadorInstalacao: 1000,
-            dataInstalacao: '2023-12-01T12:00:00Z',
-            dataUltimoContador: '2023-12-01T12:30:00Z',
+            dataInstalacao: "2023-01-15T00:00:00.000Z",
+            dataUltimoContador: "2023-12-01T12:30:00.000Z",
+            datacontadorRetirada: "2023-12-05T08:45:00.000Z",
+            ultimoContador: "valor_ultimoContador"
         };
 
         const response = await request(server)
@@ -106,8 +113,10 @@ describe('Printer Controller', () => {
             numeroSerie: defaultSerie,
             codigoLocadora: defaultLocadora,
             contadorInstalacao: 1500,
-            dataInstalacao: '2023-12-02T12:00:00Z',
-            dataUltimoContador: '2023-12-02T12:30:00Z',
+            dataInstalacao: "2023-01-15T00:00:00.000Z",
+            dataUltimoContador: "2023-12-01T12:30:00.000Z",
+            datacontadorRetirada: "2023-12-05T08:45:00.000Z",
+            ultimoContador: "valor_ultimoContador"
         };
 
         const response = await request(server)

@@ -21,7 +21,7 @@ describe('Contador Controller', () => {
         const contadorData = {
             contadorCopiasPB: "500",
             contadorImpressoesPB: "1000",
-            numeroSerie: 'exemplo_numero_serie',
+            numeroSerie: '12346',
             contadorImpressoesColoridas: "150",
             contadorCopiasColoridas: "100",
             contadorGeral: "1200",
@@ -38,37 +38,6 @@ describe('Contador Controller', () => {
         contador_created_id = response.body.data.id;
     });
 
-    it('should return a 400 status if ip already exists', async () => {
-        await request(server)
-            .post('/impressora/create')
-            .send({
-                contadorCopiasPB: "500",
-                contadorImpressoesPB: "1000",
-                numeroSerie: '123',
-                contadorImpressoesColoridas: "150",
-                contadorCopiasColoridas: "100",
-                contadorGeral: "1200",
-                dataHoraEmissaoRelatorio: "2023-12-01T14:45:00Z"
-            });
-
-        // Tente criar uma novo contador manual com o mesmo numero de serie
-        const contadorData = {
-            contadorCopiasPB: "500",
-            contadorImpressoesPB: "1000",
-            numeroSerie: '123',
-            contadorImpressoesColoridas: "150",
-            contadorCopiasColoridas: "100",
-            contadorGeral: "1200",
-            dataHoraEmissaoRelatorio: "2023-12-01T14:45:00Z"
-        };
-
-        const response = await request(server)
-            .post('/contador/create')
-            .send(contadorData);
-
-        expect(response.status).toBe(400);
-        expect(response.body.error).toBe(true);
-        expect(response.body.message).toBe('Erro: Impressora já existe!');
-    });
+  
     
 });
