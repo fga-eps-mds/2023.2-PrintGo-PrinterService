@@ -31,10 +31,10 @@ Aplicação disponível em: [link da aplicação](?)
 
 ```bash
 # 1. Clone o projeto
-git clone git@github.com:fga-eps-mds/2023.2-PrintGo-UserService.git
+git clone https://github.com/fga-eps-mds/2023.2-PrintGo-PrinterService.git
 
 # 2. Entre na pasta do projeto
-cd 2023.2-PrintGo-UserService
+cd 2023.2-PrintGo-PrinterService
 
 docker-compose up --build
     # --build somente eh necessario na primeira vez que estiver rodando
@@ -53,6 +53,8 @@ Para contribuir com esse projeto é importante seguir nosso [Guia de Contribuiç
 - [Documentação](https://github.com/fga-eps-mds/2023.2-PrintGo-Doc)
 
 - [Front-End](https://github.com/fga-eps-mds/2023.2-PrintGo-FrontEnd)
+
+- [ApiGateway](https://github.com/fga-eps-mds/2023.2-PrintGo-ApiGateway)
 
 - [Back-End: UserService](https://github.com/fga-eps-mds/2023.2-PrintGo-UserService)
 
