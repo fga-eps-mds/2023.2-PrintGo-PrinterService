@@ -1,27 +1,29 @@
 export type ImpressoraCreateInput = {
-    padrao_id: string;
     ip: string;
+    padrao_id: string;
     numeroSerie: string;
     codigoLocadora: string;
-    contadorInstalacao: number;
+    contadorInstalacao: number;    
     dataInstalacao: Date;
+    contadorRetiradas: number;
+    dataContadorRetirada: Date;
+    ultimoContador: number;
     dataUltimoContador: Date;
     unidadeId?: string;
-    datacontadorRetirada?: Date;
-    ultimoContador?: string;
 }
 export type ImpressoraCreateOutput = {
     id: string;
-    padrao_id: string;
     ip: string;
+    padrao_id: string;
     numeroSerie: string;
     codigoLocadora: string;
-    contadorInstalacao: number;
+    contadorInstalacao: number;    
     dataInstalacao: Date;
+    contadorRetiradas: number;
+    dataContadorRetirada: Date;
+    ultimoContador: number;
     dataUltimoContador: Date;
     unidadeId?: string;
-    datacontadorRetirada?: Date;
-    ultimoContador?: string;
 }
 
 export type ImpressoraUpdateInput = {
@@ -30,13 +32,17 @@ export type ImpressoraUpdateInput = {
     ip: string;
     numeroSerie: string;
     codigoLocadora: string;
-    contadorInstalacao: number;
+
+    contadorInstalacao: number;    
     dataInstalacao: Date;
-    dataUltimoContador: Date;
-    unidadeId?: string;
-    status?: string;
+
+    contadorRetirada?: string;
     datacontadorRetirada?: Date;
+
     ultimoContador?: string;
+    dataUltimoContador: Date;
+    
+    unidadeId?: string;
 }
 
 export type ImpressoraUpdateOutput = {
@@ -45,18 +51,22 @@ export type ImpressoraUpdateOutput = {
     ip: string;
     numeroSerie: string;
     codigoLocadora: string;
-    contadorInstalacao: number;
+
+    contadorInstalacao: number;    
     dataInstalacao: Date;
-    dataUltimoContador: Date;
-    unidadeId?: string;
-    status?: string;
+
+    contadorRetirada?: string;
     datacontadorRetirada?: Date;
+
     ultimoContador?: string;
+    dataUltimoContador: Date;
+    
+    unidadeId?: string;
 }
 
 export type ImpressoraToggleInput = {
     id: string;
-    status: string
+    status: string;
 }
 
 export type ImpressoraToggleOutput = {
@@ -65,11 +75,16 @@ export type ImpressoraToggleOutput = {
     ip: string;
     numeroSerie: string;
     codigoLocadora: string;
-    contadorInstalacao: number;
+
+    contadorInstalacao: number;    
     dataInstalacao: Date;
-    dataUltimoContador: Date;
-    unidadeId?: string;
+
+    contadorRetirada?: string;
     datacontadorRetirada?: Date;
+
     ultimoContador?: string;
+    dataUltimoContador: Date;
+    
+    unidadeId?: string;
     status: string;
 }

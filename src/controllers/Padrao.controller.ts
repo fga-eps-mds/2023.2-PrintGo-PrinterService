@@ -8,10 +8,10 @@ export default {
             const {
                 tipo,
                 marca,
+                modeloImpressora,
                 modelo,
                 numeroSerie,
                 versaoFirmware,
-                tempoAtivoSistema,
                 totalDigitalizacoes,
                 totalCopiasPB,
                 totalCopiasColoridas,
@@ -19,7 +19,7 @@ export default {
                 totalImpressoesColoridas,
                 totalGeral,
                 enderecoIp,
-                modeloImpressora,
+                tempoAtivoSistema,
             } = request.body as PadraoCreateInput;
 
 
@@ -48,7 +48,7 @@ export default {
             });
 
         } catch (error) {
-            return response.json({ error: true, message: error.message });
+            return response.status(500).json({ error: true, message: error.message });
         }
     },
 
