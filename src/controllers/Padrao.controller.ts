@@ -104,7 +104,7 @@ export default {
           }
   
           return response.status(200).json({
-              message: 'Sucesso: Padrão atualizada com sucesso!',
+              message: 'Sucesso: Padrão atualizado com sucesso!',
               data: await prisma.padrao.update({
                 where: { id },
                 data: { status: toggleStatus },

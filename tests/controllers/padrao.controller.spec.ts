@@ -15,15 +15,15 @@ describe('Padrao Controller', () => {
             tipo: "padrao",
             marca: "exemplo_marca",
             modelo: "exemplo_modelo",
-            numeroSerie: "exemplo_numero_serie",
-            versaoFirmware: "exemplo_versao_firmware",
-            tempoAtivoSistema: "2023-12-01T15:30:00Z",
-            totalDigitalizacoes: "500", 
-            totalCopiasPB: "1000",      
-            totalCopiasColoridas: "200", 
-            totalImpressoesPb: "800",    
-            totalImpressoesColoridas: "150", 
-            totalGeral: "950",           
+            numeroSerie: "192.168.1.2",
+            versaoFirmware: "192.168.1.2",
+            tempoAtivoSistema: "192.168.1.2",
+            totalDigitalizacoes: "192.168.1.2", 
+            totalCopiasPB: "192.168.1.2",      
+            totalCopiasColoridas: "192.168.1.2", 
+            totalImpressoesPb: "192.168.1.2",    
+            totalImpressoesColoridas: "192.168.1.2", 
+            totalGeral: "192.168.1.2",           
             enderecoIp: "192.168.1.2"
         };
 
@@ -75,6 +75,24 @@ describe('Padrao Controller', () => {
         expect(response.status).toBe(404);
         expect(response.body.error).toBe(true);
         expect(response.body.message).toBe('Erro: Não foi possível encontrar o padrão.');
+    });
+
+    it('should toggle a pattern by ID and return a 200 status', async () => {
+      const response = await request(server)
+          .patch(`/padrao/${padrao_created_id}`)
+          .send({ id: padrao_created_id, status: 'ATIVO' });
+
+      expect(response.status).toBe(200);
+      expect(response.body.message).toBe('Sucesso: Padrão atualizado com sucesso!');
+    });
+
+    it('should return a 404 status if pattern is not found', async () => {
+      const response = await request(server)
+          .patch(`/padrao/${"non-existant-id"}`)
+          .send({ id: "non-existant-id", status: 'ATIVO' });
+
+      expect(response.status).toBe(404);
+      expect(response.body.message).toBe('Erro: Padrão não encontrado!');
     });
 
     it('should delete pattern by ID and return a 200 status', async () => {
