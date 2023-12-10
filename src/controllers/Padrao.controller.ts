@@ -120,15 +120,15 @@ export default {
     const { id } = request.params;
 
     try {
-        const printer = await prisma.padrao.delete({
+        const pattern = await prisma.padrao.delete({
             where: {
                 id: String(id),
             },
         });
 
-        console.log(printer);
+        console.log(pattern);
 
-        return printer ? 
+        return pattern ? 
         response.status(200).json({ message: "Sucesso: padrão deletado com sucesso." }) : 
         response.status(404).json({
             error: true,

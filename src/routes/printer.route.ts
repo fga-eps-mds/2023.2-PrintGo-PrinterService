@@ -7,5 +7,6 @@ impressoraRoutes.post('/create', requestHandler(ImpressoraController.createImpre
 impressoraRoutes.get('/', requestHandler(ImpressoraController.listImpressoras));
 impressoraRoutes.put('/:id', requestHandler(ImpressoraController.editImpressora));
 impressoraRoutes.patch('/:id', requestHandler(ImpressoraController.toggleImpressora));
+impressoraRoutes.delete('/:id', requestHandler(ImpressoraController.deleteImpressoraById));
 
 export default impressoraRoutes;
