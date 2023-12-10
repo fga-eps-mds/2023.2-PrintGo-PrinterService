@@ -21,7 +21,7 @@ describe('Contador Controller', () => {
         const contadorData = {
             contadorCopiasPB: "500",
             contadorImpressoesPB: "1000",
-            numeroSerie: '12346',
+            numeroSerie: '1231231231',
             contadorImpressoesColoridas: "150",
             contadorCopiasColoridas: "100",
             contadorGeral: "1200",
@@ -32,12 +32,11 @@ describe('Contador Controller', () => {
             .post('/contador/create')
             .send(contadorData);
 
+        console.log(response.body);
+
         expect(response.status).toBe(201);
         expect(response.body.message).toBe('Sucesso: Contador Manual cadastrado com sucesso!');
         expect(response.body.data).toHaveProperty('id');
         contador_created_id = response.body.data.id;
     });
-
-  
-    
 });

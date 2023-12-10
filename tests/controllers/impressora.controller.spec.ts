@@ -5,8 +5,8 @@ import { prisma } from '../../src/database';
 describe('Printer Controller', () => {
     let impressora_created_id: string;
     const defaultIP = `teste${Date.now()}.1.2`;
-    const defaultPadrao = 'clptb6ao60000qr485ep4l9el';
-    const defaultLocadora = 'cfa19c26-3b18-4659-b02e-51047e5b3d13';
+    const defaultPadrao = 'clpz1mhas0002mxauco67iokp';
+    const defaultLocadora = '1565a-1032';
     const defaultSerie = `teste${Date.now()}.serienumber`;
 
     afterAll(async () => {
@@ -28,10 +28,10 @@ describe('Printer Controller', () => {
             codigoLocadora: defaultLocadora,
             contadorInstalacao: 1000,
             dataInstalacao: "2023-01-15T00:00:00.000Z",
+            contadorRetiradas: 10,
+            dataContadorRetirada: "2023-12-01T12:30:00.000Z",
             dataUltimoContador: "2023-12-01T12:30:00.000Z",
-            datacontadorRetirada: "2023-12-05T08:45:00.000Z",
-            ultimoContador: "valor_ultimoContador"
-        
+            ultimoContador: 10
         };
 
         const response = await request(server)
@@ -48,28 +48,30 @@ describe('Printer Controller', () => {
         await request(server)
             .post('/impressora/create')
             .send({
-                padrao_id: defaultPadrao,
-                ip: defaultIP,
-                numeroSerie: defaultSerie,
-                codigoLocadora: defaultLocadora,
-                contadorInstalacao: 1000,
-                dataInstalacao: "2023-01-15T00:00:00.000Z",
-                dataUltimoContador: "2023-12-01T12:30:00.000Z",
-                datacontadorRetirada: "2023-12-05T08:45:00.000Z",
-                ultimoContador: "valor_ultimoContador"
+              padrao_id: defaultPadrao,
+              ip: defaultIP,
+              numeroSerie: defaultSerie,
+              codigoLocadora: defaultLocadora,
+              contadorInstalacao: 1000,
+              dataInstalacao: "2023-01-15T00:00:00.000Z",
+              contadorRetiradas: 10,
+              dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+              dataUltimoContador: "2023-12-01T12:30:00.000Z",
+              ultimoContador: 10
             });
 
         // Tente criar uma nova impressora com o mesmo ip
         const printData = {
-            padrao_id: defaultPadrao,
-            ip: defaultIP,
-            numeroSerie: '1251234',
-            codigoLocadora: defaultLocadora,
-            contadorInstalacao: 1000,
-            dataInstalacao: "2023-01-15T00:00:00.000Z",
-            dataUltimoContador: "2023-12-01T12:30:00.000Z",
-            datacontadorRetirada: "2023-12-05T08:45:00.000Z",
-            ultimoContador: "valor_ultimoContador"
+          padrao_id: defaultPadrao,
+          ip: defaultIP,
+          numeroSerie: defaultSerie,
+          codigoLocadora: defaultLocadora,
+          contadorInstalacao: 1000,
+          dataInstalacao: "2023-01-15T00:00:00.000Z",
+          contadorRetiradas: 10,
+          dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+          dataUltimoContador: "2023-12-01T12:30:00.000Z",
+          ultimoContador: 10
         };
 
         const response = await request(server)
@@ -112,25 +114,29 @@ describe('Printer Controller', () => {
             ip: defaultIP,
             numeroSerie: defaultSerie,
             codigoLocadora: defaultLocadora,
-            contadorInstalacao: 1500,
+            contadorInstalacao: 1000,
             dataInstalacao: "2023-01-15T00:00:00.000Z",
+            contadorRetiradas: 10,
+            dataContadorRetirada: "2023-12-01T12:30:00.000Z",
             dataUltimoContador: "2023-12-01T12:30:00.000Z",
-            datacontadorRetirada: "2023-12-05T08:45:00.000Z",
-            ultimoContador: "valor_ultimoContador"
+            ultimoContador: 10
         };
 
         const response = await request(server)
-            .put('/impressora/')
+            .put(`/impressora/${impressora_created_id}`)
             .send(editedData);
+
+        console.log(response.body);
+        console.log(impressora_created_id);
 
         expect(response.status).toBe(200);
         expect(response.body.message).toBe('Sucesso: Impressora atualizada com sucesso!');
         expect(response.body.data).toHaveProperty('id');
     });
 
-    it('update user wrong user id', async () => {
+    it('update printer wrong printer id', async () => {
         const response = await request(server)
-            .patch(`/impressora/${impressora_created_id}1234`)
+            .put(`/impressora/${impressora_created_id}1234`)
             .send({
                 numeroSerie: '222212',
                 contadorInstalacao: 1501,
@@ -143,7 +149,7 @@ describe('Printer Controller', () => {
         const nonExistingPrinterId = 'non-existing-id';
 
         const toggleResponse = await request(server)
-            .put('/impressora/')
+            .put(`/impressora/${nonExistingPrinterId}`)
             .send({
                 id: nonExistingPrinterId,
                 contadorInstalacao: 1501,
@@ -157,11 +163,11 @@ describe('Printer Controller', () => {
     it('should toggle the status of an existing printer and return a 200 status', async () => {
         const toggleData = {
             id: impressora_created_id,
-            status: 'ATIVO', // You can change the status based on your implementation
+            status: 'ATIVO',
         };
 
         const response = await request(server)
-            .patch('/impressora/')
+            .patch(`/impressora/${impressora_created_id}`)
             .send(toggleData);
 
         expect(response.status).toBe(200);
@@ -173,7 +179,7 @@ describe('Printer Controller', () => {
         const nonExistingPrinterId = 'non-existing-id';
 
         const toggleResponse = await request(server)
-            .patch('/impressora/')
+            .patch(`/impressora/${nonExistingPrinterId}`)
             .send({
                 id: nonExistingPrinterId,
                 status: 'ATIVO',
