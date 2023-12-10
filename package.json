@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest --passWithNoTests --no-cache --runInBand",
         "test:all": "CI=true npm run test -- --coverage",
+        "build": "tsc",
         "start": "nodemon",
         "lint": "eslint  --ext .ts",
         "lint:fix": "eslint  --ext .ts --fix"
@@ -21,7 +22,7 @@
     },
     "homepage": "https://github.com/fga-eps-mds/2023.2-PrintGo-PrinterService#readme",
     "dependencies": {
-        "@fernandes-natanael/printgo-prisma": "^1.0.15",
+        "@fernandes-natanael/printgo-prisma": "^1.0.21",
         "bcryptjs": "^2.4.3",
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
