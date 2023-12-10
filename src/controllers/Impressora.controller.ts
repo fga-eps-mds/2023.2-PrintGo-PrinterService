@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../database';
-import {ImpressoraCreateInput} from '../types/Impressora.type'
+import {ImpressoraCreateInput, ImpressoraUpdateInput} from '../types/Impressora.type'
 
 export default {
     async createImpressora(request: Request, response: Response) {
@@ -83,7 +83,7 @@ export default {
     async editImpressora(request: Request, response: Response) {
         try {
             const { id } = request.params;
-            const impressoraToChange = request.body;
+            const impressoraToChange = request.body as ImpressoraUpdateInput;
 
             const impressoraExist = await prisma.impressora.findUnique({ where: { id: String(id) } });
       
@@ -145,6 +145,7 @@ export default {
     const { id } = request.params;
 
     try {
+        
         const printerExists = await prisma.impressora.findUnique({ where: { id } });
     
         if (!printerExists) {
