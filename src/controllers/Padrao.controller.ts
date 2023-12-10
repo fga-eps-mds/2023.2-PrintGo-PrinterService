@@ -137,10 +137,7 @@ export default {
         });
 
     } catch (error) {
-        response.status(500).json({
-            error: true,
-            message: 'Erro: Ocorreu um erro ao apagar o padrão.'
-        });
+        response.status(500).json({error: true, message: 'Erro: Ocorreu um erro ao apagar o padrão.'});
     }
   },
 };

@@ -37,7 +37,7 @@ export default {
             });
 
         } catch (error) {
-            return response.json({ error: true, message: error.message });
+            return response.status(500).json({ error: true, message: error.message });
         }
     },
 };
