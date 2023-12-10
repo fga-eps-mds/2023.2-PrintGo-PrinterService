@@ -100,9 +100,17 @@ describe('Padrao Controller', () => {
             .delete(`/padrao/${padrao_created_id}`);
 
         expect(response.status).toBe(200);
-        expect(response.body.message).toBe('Sucesso: padrão deletado com sucesso.');
+        expect(response.body.message).toBe('Sucesso: Padrão deletado com sucesso!');
     });
 
- 
+    it('should return a 404 status if pattern is not found', async () => {
+      const response = await request(server)
+          .delete(`/padrao/${"non-existant-id"}`);
+
+      console.log(response.body)
+
+      expect(response.status).toBe(404);
+      expect(response.body.message).toBe('Erro: Padrão não encontrado!');
+  });
     
 });

@@ -34,14 +34,6 @@ describe('Printer Controller', () => {
     })
 
     afterAll(async () => {
-        if (impressora_created_id) {
-            await prisma.impressora.delete({
-                where: {
-                    id: impressora_created_id,
-                },
-            });
-        }
-
         await request(server)
           .delete(`/padrao/${defaultPadrao}`);
 
@@ -217,4 +209,22 @@ describe('Printer Controller', () => {
         expect(toggleResponse.body).toHaveProperty('error', true);
         expect(toggleResponse.body).toHaveProperty('message', 'Erro: Impressora não encontrada!');
     });
+
+    it('should delete printer by ID and return a 200 status', async () => {
+      const response = await request(server)
+          .delete(`/impressora/${impressora_created_id}`);
+
+      expect(response.status).toBe(200);
+      expect(response.body.message).toBe("Sucesso: impressora deletada com sucesso.");
+    });
+
+    it('should return a 404 status if printer is not found', async () => {
+      const response = await request(server)
+          .delete(`/impressora/${"non-existant-id"}`);
+
+      console.log(response.body)
+
+      expect(response.status).toBe(404);
+      expect(response.body.message).toBe('Erro: Não foi possível encontrar a impressora.');
+  });
 });
