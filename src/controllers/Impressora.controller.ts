@@ -145,6 +145,7 @@ export default {
     const { id } = request.params;
 
     try {
+        
         const printerExists = await prisma.impressora.findUnique({ where: { id } });
     
         if (!printerExists) {
