@@ -27,21 +27,16 @@ export type ImpressoraCreateOutput = {
 }
 
 export type ImpressoraUpdateInput = {
-    id: string;
-    padrao_id: string;
-    ip: string;
-    numeroSerie: string;
-    codigoLocadora: string;
-
-    contadorInstalacao: number;    
-    dataInstalacao: Date;
-
-    contadorRetirada?: number;
-    datacontadorRetirada?: Date;
-
+    ip?: string;
+    padrao_id?: string;
+    numeroSerie?: string;
+    codigoLocadora?: string;
+    contadorInstalacao?: number;    
+    dataInstalacao?: Date;
+    contadorRetiradas?: number;
+    dataContadorRetirada?: Date;
     ultimoContador?: number;
-    dataUltimoContador: Date;
-    
+    dataUltimoContador?: Date;
     unidadeId?: string;
 }
 
