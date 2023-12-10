@@ -99,22 +99,46 @@ export default {
           if (!patternExists) {
               return response.status(404).json({
                   error: true,
-                  message: 'Erro: Padrão não encontrada!',
+                  message: 'Erro: Padrão não encontrado!',
               });
           }
   
-          const togglePattern = await prisma.padrao.update({
-              where: { id },
-              data: { status: toggleStatus },
-          });
-  
           return response.status(200).json({
               message: 'Sucesso: Padrão atualizada com sucesso!',
-              data: togglePattern,
+              data: await prisma.padrao.update({
+                where: { id },
+                data: { status: toggleStatus },
+              }),
           });
   
       } catch (error) {
           return response.status(500).json({ error: true, message: error.message });
       }
   },
+
+  async deletePadraoById(request: Request, response: Response) {
+    const { id } = request.params;
+
+    try {
+        const printer = await prisma.padrao.delete({
+            where: {
+                id: String(id),
+            },
+        });
+
+        console.log(printer);
+
+        return printer ? 
+        response.status(200).json({ message: "Sucesso: padrão deletado com sucesso." }) : 
+        response.status(404).json({
+            error: true,
+            message: 'Erro: Não foi possível apagar o padrão.'
+        });
+    } catch (error) {
+        response.status(500).json({
+            error: true,
+            message: 'Erro: Ocorreu um erro ao apagar o padrão.'
+        });
+    }
+},
 };
