@@ -36,10 +36,10 @@ export type ImpressoraUpdateInput = {
     contadorInstalacao: number;    
     dataInstalacao: Date;
 
-    contadorRetirada?: string;
+    contadorRetirada?: number;
     datacontadorRetirada?: Date;
 
-    ultimoContador?: string;
+    ultimoContador?: number;
     dataUltimoContador: Date;
     
     unidadeId?: string;
@@ -55,10 +55,10 @@ export type ImpressoraUpdateOutput = {
     contadorInstalacao: number;    
     dataInstalacao: Date;
 
-    contadorRetirada?: string;
+    contadorRetirada?: number;
     datacontadorRetirada?: Date;
 
-    ultimoContador?: string;
+    ultimoContador?: number;
     dataUltimoContador: Date;
     
     unidadeId?: string;
@@ -79,10 +79,10 @@ export type ImpressoraToggleOutput = {
     contadorInstalacao: number;    
     dataInstalacao: Date;
 
-    contadorRetirada?: string;
+    contadorRetirada?: number;
     datacontadorRetirada?: Date;
 
-    ultimoContador?: string;
+    ultimoContador?: number;
     dataUltimoContador: Date;
     
     unidadeId?: string;

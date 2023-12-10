@@ -140,4 +140,32 @@ export default {
             return response.status(500).json({ error: true, message: error.message });
         }
     },
+
+  async deleteImpressoraById(request: Request, response: Response) {
+    const { id } = request.params;
+
+    try {
+        const printerExists = await prisma.impressora.findUnique({ where: { id } });
+    
+        if (!printerExists) {
+            return response.status(404).json({
+                error: true,
+                message: 'Erro: Não foi possível encontrar a impressora.',
+            });
+        }
+
+        return response.status(200).json({
+          message: "Sucesso: impressora deletada com sucesso.",
+          data: await prisma.impressora.delete({
+            where: { id },
+          }),
+        });
+
+    } catch (error) {
+        response.status(500).json({
+            error: true,
+            message: 'Erro: Ocorreu um erro ao apagar a impressora.'
+        });
+    }
+  },
 };

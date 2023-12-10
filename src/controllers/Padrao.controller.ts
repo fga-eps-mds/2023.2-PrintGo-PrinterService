@@ -1,4 +1,4 @@
-import { Request, Response, request } from 'express';
+import { Request, Response } from 'express';
 import { prisma } from '../database';
 import {PadraoCreateInput} from '../types/Padrao.type'
 
@@ -88,29 +88,59 @@ export default {
         }
     },
 
-    async deletePadraoById(request: Request, response: Response) {
-        const { id } = request.params;
+    async togglePadrao(request: Request, response: Response) {
+      try {
+          const { id, status } = request.body;
+  
+          const toggleStatus = status === 'ATIVO' ? 'DESATIVADO' : 'ATIVO';
+  
+          const patternExists = await prisma.padrao.findUnique({ where: { id } });
+  
+          if (!patternExists) {
+              return response.status(404).json({
+                  error: true,
+                  message: 'Erro: Padrão não encontrado!',
+              });
+          }
+  
+          return response.status(200).json({
+              message: 'Sucesso: Padrão atualizado com sucesso!',
+              data: await prisma.padrao.update({
+                where: { id },
+                data: { status: toggleStatus },
+              }),
+          });
+  
+      } catch (error) {
+          return response.status(500).json({ error: true, message: error.message });
+      }
+  },
 
-        try {
-            const printer = await prisma.padrao.delete({
-                where: {
-                    id: String(id),
-                },
-            });
+  async deletePadraoById(request: Request, response: Response) {
+    const { id } = request.params;
 
-            console.log(printer);
-
-            return printer ? 
-            response.status(200).json({ message: "Sucesso: padrão deletado com sucesso." }) : 
-            response.status(404).json({
+    try {
+        const patternExists = await prisma.padrao.findUnique({ where: { id } });
+    
+        if (!patternExists) {
+            return response.status(404).json({
                 error: true,
-                message: 'Erro: Não foi possível apagar o padrão.'
-            });
-        } catch (error) {
-            response.status(500).json({
-                error: true,
-                message: 'Erro: Ocorreu um erro ao apagar o padrão.'
+                message: 'Erro: Padrão não encontrado!',
             });
         }
-    },
+
+        return response.status(200).json({
+          message: 'Sucesso: Padrão deletado com sucesso!',
+          data: await prisma.padrao.delete({
+            where: { id },
+          }),
+        });
+
+    } catch (error) {
+        response.status(500).json({
+            error: true,
+            message: 'Erro: Ocorreu um erro ao apagar o padrão.'
+        });
+    }
+  },
 };
