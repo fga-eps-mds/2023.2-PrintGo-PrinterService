@@ -3,14 +3,37 @@ import { server } from '../../src/server';
 import { prisma } from '../../src/database';
 
 describe('Printer Controller', () => {
+
+    const padraoData = {
+      tipo: "padrao",
+      marca: "exemplo_marca",
+      modelo: "exemplo_modelo",
+      numeroSerie: "192.168.1.2",
+      versaoFirmware: "192.168.1.2",
+      tempoAtivoSistema: "192.168.1.2",
+      totalDigitalizacoes: "192.168.1.2", 
+      totalCopiasPB: "192.168.1.2",      
+      totalCopiasColoridas: "192.168.1.2", 
+      totalImpressoesPb: "192.168.1.2",    
+      totalImpressoesColoridas: "192.168.1.2", 
+      totalGeral: "192.168.1.2",           
+      enderecoIp: "192.168.1.2"
+    };
+
     let impressora_created_id: string;
     const defaultIP = `teste${Date.now()}.1.2`;
-    const defaultPadrao = 'clpz1mhas0002mxauco67iokp';
+    let defaultPadrao = null;
     const defaultLocadora = '1565a-1032';
     const defaultSerie = `teste${Date.now()}.serienumber`;
 
+    beforeAll(async () => {
+      const response = await request(server)
+                        .post('/padrao/create')
+                        .send(padraoData);
+      defaultPadrao = response.body.data.id;
+    })
+
     afterAll(async () => {
-        await server.close();
         if (impressora_created_id) {
             await prisma.impressora.delete({
                 where: {
@@ -18,6 +41,11 @@ describe('Printer Controller', () => {
                 },
             });
         }
+
+        await request(server)
+          .delete(`/padrao/${defaultPadrao}`);
+
+        await server.close();
     });
 
     it('should create a new printer and return a 201 status', async () => {
