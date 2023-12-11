@@ -72,15 +72,18 @@ export default {
                 where: { id: String(id) },
             });
 
-
-            return padrao ?
-                response.json(padrao):
-                response.status(404).json({
+            if(padrao) {
+                const status=200;
+                return response.status(status).json(padrao)
+            } else {
+                const status=404;
+                return response.status(status).json({
                     error: true,
-                    message: 'Erro: Não foi possível encontrar o padrão.'
-                });
+                    message: 'Erro: Não foi possível encontrar o padrão.',
+                })
+            }
         } catch (error) {
-            response.status(500).json({
+            return response.status(500).json({
                 error: true,
                 message: 'Erro: Ocorreu um erro ao buscar  o padrão por ID.'
             });
