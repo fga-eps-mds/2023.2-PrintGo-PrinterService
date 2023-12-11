@@ -95,8 +95,27 @@ describe('Contador Controller', () => {
         expect(response.body.data).toHaveProperty('id');
         contador_created_id = response.body.data.id;
     });
-});
+    
+    it('should Contador return a 404 status numeroSerie not founded', async () => {
+        const contadorData = {
+            contadorCopiasPB: "500",
+            contadorImpressoesPB: "1000",
+            numeroSerie: `defaultSerie1312312`,
+            contadorImpressoesColoridas: "150",
+            contadorCopiasColoridas: "100",
+            contadorGeral: "1200",
+            dataHoraEmissaoRelatorio: "2023-12-01T14:45:00Z"
+        };
 
+        const response = await request(server)
+            .post('/contador/create')
+            .send(contadorData);
+
+        console.log(response.body);
+
+        expect(response.status).toBe(500);
+    });
+});
 
 describe('Printer Controller', () => {
 
@@ -151,6 +170,27 @@ describe('Printer Controller', () => {
         expect(response.body.message).toBe('Sucesso: Impressora cadastrada com sucesso!');
         expect(response.body.data).toHaveProperty('id');
         impressora_created_id = response.body.data.id;
+    });
+
+    it('should create a new printer and return a 404 status', async () => {
+        const printData = {
+            padrao_id: "errado",
+            ip: `defaultIP${Date.now()}`,
+            numeroSerie: `defaultSerie${Date.now()}`,
+            codigoLocadora: `defaultLocadora${Date.now()}`,
+            contadorInstalacao: 1000,
+            dataInstalacao: "2023-01-15T00:00:00.000Z",
+            contadorRetiradas: 10,
+            dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+            dataUltimoContador: "2023-12-01T12:30:00.000Z",
+            ultimoContador: 10
+        };
+
+        const response = await request(server)
+            .post('/impressora/create')
+            .send(printData);
+
+        expect(response.status).toBe(404);
     });
 
     it('should return a 400 status if ip already exists', async () => {
@@ -249,6 +289,27 @@ describe('Printer Controller', () => {
             .send({
                 numeroSerie: '222212',
                 contadorInstalacao: 1501,
+            });
+
+        expect(response.status).toBe(404);
+    });
+
+    it('update printer wrong printer id', async () => {
+        const response = await request(server)
+            .patch(`/impressora/${impressora_created_id}1234`)
+            .send({
+                numeroSerie: '222212',
+                contadorInstalacao: 1501,
+            });
+
+        expect(response.status).toBe(404);
+    });
+
+    it('update printer wrong printer id', async () => {
+        const response = await request(server)
+            .patch(`/impressora/${impressora_created_id}`)
+            .send({
+                padrao_id: "12003123"
             });
 
         expect(response.status).toBe(404);
@@ -441,5 +502,4 @@ describe('Padrao Controller', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toBe('Erro: Padrão não encontrado!');
   });
-    
 });

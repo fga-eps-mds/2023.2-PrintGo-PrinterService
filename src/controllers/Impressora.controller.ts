@@ -94,6 +94,14 @@ export default {
               });
             }
 
+            const padraoExist = await prisma.padrao.findUnique({ where: { id: impressoraToChange.padrao_id } });
+            if(!padraoExist) {
+                return response.status(404).json({
+                    error: true,
+                    message: 'Erro: Padrao não encontrado!'
+                });
+            }
+            
             const updatedImpressora = await prisma.impressora.update({
                 where: {
                     id: String(id)

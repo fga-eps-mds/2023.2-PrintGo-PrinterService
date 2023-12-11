@@ -72,7 +72,6 @@ export default {
                 where: { id: String(id) },
             });
 
-            console.log(id);
 
             return padrao ?
                 response.json(padrao):
