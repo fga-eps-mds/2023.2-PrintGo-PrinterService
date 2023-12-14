@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../database';
-import { PadraoCreateInput } from '../types/Padrao.type';
-import { PadraoUpdateInput } from '../types/Padrao.type';
+import { PadraoCreateInput, PadraoUpdateInput } from '../types/Padrao.type';
 
 export default {
     async createPadrao(request: Request, response: Response) {
