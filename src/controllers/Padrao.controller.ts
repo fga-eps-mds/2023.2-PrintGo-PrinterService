@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../database';
-import {PadraoCreateInput} from '../types/Padrao.type'
+import { PadraoCreateInput, PadraoUpdateInput } from '../types/Padrao.type';
 
 export default {
     async createPadrao(request: Request, response: Response) {
@@ -50,6 +50,37 @@ export default {
         } catch (error) {
             return response.status(500).json({ error: true, message: error.message });
         }
+    },
+    
+    async editPadrao(request: Request, response: Response) {
+      try {
+        const { id } = request.params;
+        const padraoToChange = request.body as PadraoUpdateInput;
+        
+        const padraoExists = await prisma.padrao.findUnique({ where: { id: String(id) } });
+        
+        if (!padraoExists) {
+          return response.status(404).json({
+            error: true,
+            message: 'Erro: Padrão não encontrado!',
+          });
+        }
+        
+        const updatedPadrao = await prisma.padrao.update({
+          where: {
+            id: String(id)
+          },
+          data: padraoToChange,
+        });
+        
+        return response.status(200).json({
+          message: 'Sucesso: Padrão atualizado com sucesso!',
+          data: updatedPadrao,
+        });
+        
+      } catch (error) {
+        return response.json({ error: true, message: error.message });
+      }
     },
 
     async  listPadroes(request: Request, response: Response) {

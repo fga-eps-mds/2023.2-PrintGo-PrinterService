@@ -40,7 +40,7 @@ export type PadraoUpdateInput = {
   modelo: string;
   numeroSerie: string;
   versaoFirmware: string;
-  tempoAtivoSistema: Date;
+  tempoAtivoSistema: string;
   totalDigitalizacoes: string;
   totalCopiasPB: string;
   totalCopiasColoridas: string;
@@ -48,7 +48,6 @@ export type PadraoUpdateInput = {
   totalImpressoesColoridas: string;
   totalGeral: string;
   enderecoIp: string;
-  status?: string;
 };
 
 export type PadraoUpdateOutput = {
@@ -58,7 +57,7 @@ export type PadraoUpdateOutput = {
   modelo: string;
   numeroSerie: string;
   versaoFirmware: string;
-  tempoAtivoSistema: Date;
+  tempoAtivoSistema: string;
   totalDigitalizacoes: string;
   totalCopiasPB: string;
   totalCopiasColoridas: string;
@@ -66,7 +65,6 @@ export type PadraoUpdateOutput = {
   totalImpressoesColoridas: string;
   totalGeral: string;
   enderecoIp: string;
-  status?: string;
 };
 
 export type PadraoToggleInput = {
